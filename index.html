@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Natural-Language Datalog Syntax</title>
+  </head>
+  <body>
+    <div class="app"></div>
+    <script src="./remark/ohm.min.js"></script>
+    <script src="./remark/ast-walker.js"></script>
+    <script src="./remark/ast-classes.js"></script>
+    <script src="./remark/parser.js"></script>
+    <script>
+'use strict';
+const ast = NLDatalog.parse(`
+  class: center, middle, narrow
+  class: 
+
+`);
+
+const walker = new ASTWalker();
+
+const linter = {
+  ClassRow(node, parent) {
+    if (node.classNames.length === 0) {
+      throw new Error('No ClassRows should be empty');
+    }
+  }
+}
+
+walker.traverse(ast,
+{
+   enterNode: (node, parent) =>
+   {  
+      if (node.type && linter[node.type]) {
+        linter[node.type](node, parent)
+      }
+   }
+});
+    </script>
+  </body>
+</html>
