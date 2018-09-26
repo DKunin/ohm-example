@@ -8,7 +8,17 @@
     <script src="./remark/ast-walker.js"></script>
     <script src="./remark/ast-classes.js"></script>
     <script src="./remark/parser.js"></script>
+      <!-- doc = (classRow | singleSlide)+
+    singleSlide = "===" (~"===" (classRow))*
+    classDecl = "class: "
+    classRow = classDecl (className ("," className)*)*
+    className = classChar+
+    classChar = ~(eol | "," | "\\n") any
+    eol = "\\r"? "\\n" -->
     <script>
+
+
+
 'use strict';
 const ast = NLDatalog.parse(`
   class: center, middle, narrow
