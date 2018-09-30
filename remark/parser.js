@@ -1,12 +1,9 @@
 'use strict';
 
-const NLDatalog = {};
+const RemarkJSSlider = {};
 
-    // 
-    // 
-    // classLister = listOf<word, ",">
-NLDatalog.grammar = ohm.grammar(`
-  NLDatalog {
+RemarkJSSlider.grammar = ohm.grammar(`
+  RemarkJSSlider {
     Rules
       = ListOf<Rule, "\\n">
     Rule
@@ -23,7 +20,7 @@ NLDatalog.grammar = ohm.grammar(`
   }
 `);
 
-NLDatalog.semantics = NLDatalog.grammar.createSemantics()
+RemarkJSSlider.semantics = RemarkJSSlider.grammar.createSemantics()
 .addOperation('toAST', {
   Rules(rules) {
     return new Program(rules.toAST());
@@ -71,7 +68,7 @@ NLDatalog.semantics = NLDatalog.grammar.createSemantics()
   }
 });
 
-NLDatalog.parse = function(input) {
+RemarkJSSlider.parse = function(input) {
   const matchResult = this.grammar.match(input);
   if (matchResult.succeeded()) {
     return this.semantics(matchResult).toAST();
